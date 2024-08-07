@@ -2,7 +2,7 @@ import React from 'react';
 import {Body} from './Components/Body';
 import {Footer} from './Components/Footer';
 import {Header} from './Components/Header';
-import {NewComponents} from "./Components/NewComponents";
+import {Cars, NewComponents} from "./Components/NewComponents";
 
 const students = [
     {id: 1, name: 'Student 1', age: 23},
@@ -12,6 +12,12 @@ const students = [
     {id: 5, name: 'Student 23', age: 22},
 ]
 
+const topCars = [
+    {manufacturer:'BMW', model:'m5cs'},
+    {manufacturer:'Mercedes', model:'e63s'},
+    {manufacturer:'Audi', model:'rs6'}
+]
+
 function App() {
     return (
         <div className="App">
@@ -19,6 +25,7 @@ function App() {
             <Body description={'This is a description'}/>
             <Footer FooterTitle={'Footer'}/>
             <NewComponents students={students}/>
+            <Cars cars={topCars}/>
         </div>
     );
 }
