@@ -19,14 +19,37 @@ const topCars = [
 ]
 
 function App() {
+    const onClickHandler = (name: string) => {
+        console.log(name)
+    }
+
+    const foo1 = () => {
+        console.log(100200)
+    }
+
+    const foo2 = (number: number) => {
+        console.log(number)
+    }
+
     return (
         <div className="App">
             <Header HeaderTitle={'Header'}/>
             <Body description={'This is a description'}/>
             <Footer FooterTitle={'Footer'}/>
             <NewComponents students={students} cars={topCars}/>
+
+
+            <button onClick={() => onClickHandler('name 1')}>Button 1</button>
+            <button onClick={() => onClickHandler('name 2')}>Button 2</button>
+
+
+            <button onClick={foo1}>foo1</button>
+            <button onClick={()=>foo2(100200)}>foo2</button>
         </div>
     );
 }
 
 export default App;
+
+// создать две кнопки внутрь кнопок передать функции как вариант законсолить просто что нибудь
+// в параметрах функций прописать типизацию
