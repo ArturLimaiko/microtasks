@@ -33,17 +33,17 @@ const Foo3 = () => {
 
 
 function App() {
-
+    //state for universal button
     let [a, setA] = useState(1);
     const Foo4 = () => {
         ++a;
         setA(a);
         console.log(a)
     }
-
     const reset = () => {
         setA(0);
     }
+
 
     return (
         <div className="App">
@@ -56,7 +56,6 @@ function App() {
             <Button name={'stupid button'} callBack={Foo3}/>
 
             <div>
-
                 <h1>{a}</h1>
                 <Button name={'increment'} callBack={Foo4}/>
                 <Button name={'reset'} callBack={reset}/>
@@ -68,5 +67,8 @@ function App() {
 
 export default App;
 
-// создать две кнопки внутрь кнопок передать функции как вариант законсолить просто что нибудь
-// в параметрах функций прописать типизацию
+// создать стейт с месседжами [message, setMessage]=useState('')как вариант где нибудь 3-4 объекта
+// создать инпут и кнопку и отрисовать + отрисовать сообщения которые в стейте ( через мап)
+// создать универсальный инпут( FullInput)
+// внутри будет локальный стейст который будет сохранять введенное значение [title, setTitle] = useState('')
+// инпуту и кнопке создадим функции и в параметрах укажем соответствующие onChange...OnClick...
