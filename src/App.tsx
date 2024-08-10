@@ -4,6 +4,7 @@ import {Footer} from './Components/Footer';
 import {Header} from './Components/Header';
 import {NewComponents} from "./Components/NewComponents";
 import {Button} from "./Components/Button";
+import {FullInput} from './Components/FullInput';
 
 const students = [
     {id: 1, name: 'Student 1', age: 23},
@@ -44,6 +45,20 @@ function App() {
         setA(0);
     }
 
+    //state message for Input
+    let [message, setMessage] = useState(
+        [
+            {message: 'message 1'},
+            {message: 'message 2'},
+            {message: 'message 3'}
+        ]
+    );
+
+    //function callBack for button input
+    const addMessage = (title:string) => {
+        let newMessage = {message:title}
+        setMessage([newMessage,...message]);
+    }
 
     return (
         <div className="App">
@@ -60,7 +75,18 @@ function App() {
                 <Button name={'increment'} callBack={Foo4}/>
                 <Button name={'reset'} callBack={reset}/>
             </div>
-
+            <hr/>
+            <div>
+                <Header HeaderTitle={'Microtasks Input Lesson'}/>
+                <FullInput addMessage={addMessage}/>
+                <div>
+                    {message.map((m, index) => {
+                        return (
+                            <div key={index}>{m.message}</div>
+                        )
+                    })}
+                </div>
+            </div>
         </div>
     );
 }
@@ -71,4 +97,10 @@ export default App;
 // создать инпут и кнопку и отрисовать + отрисовать сообщения которые в стейте ( через мап)
 // создать универсальный инпут( FullInput)
 // внутри будет локальный стейст который будет сохранять введенное значение [title, setTitle] = useState('')
-// инпуту и кнопке создадим функции и в параметрах укажем соответствующие onChange...OnClick...
+// инпуту и кнопке создадим по функции и в параметрах укажем event(протипизировать) onChangeInputHandler...OnClick...
+// внутри функции пропишем currentTarget.value + нам нужно записать все в локальный стейт - setTitle
+// по нажатию на кнопку у нас должна прозвониться функция которую мы создадим в app
+// -  создадим там функцию(пустую) addMessage(){} и прокинем ее в копмоненту инпут и протипизируем
+// OnClick вызываем кладем туда addMessage() внутрь передадим title и так же не забудем протипизировать
+// далее нужно засетать title  и не забыть про старые сообщения
+// очистим поле ввода в инпуте - нужно привязать title к value input'a
