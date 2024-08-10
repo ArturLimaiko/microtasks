@@ -1,17 +1,19 @@
 import React from 'react';
 
-export type ButtonInputType = {
+type ButtonInputType = {
     name:string
-    callBack:()=> void
+    callBack:()=>void
 }
 
 export const ButtonInput = ({name,callBack}:ButtonInputType) => {
 
-    const onClickHandlerButton =() => {
-        callBack()
+    const onClickButtonHandler = () => {
+        callBack();
     }
 
     return (
-        <button onClick={onClickHandlerButton}>{name}</button>
+        <div>
+            <button onClick={onClickButtonHandler}>{name}</button>
+        </div>
     );
 };

@@ -56,18 +56,20 @@ function App() {
         ]
     );
     //function callBack for button input
-    const addMessage = (title:string) => {
-        let newMessage = {message:title}
-        setMessage([newMessage,...message]);
+    const addMessage = (title: string) => {
+        let newMessage = {message: title}
+        setMessage([newMessage, ...message]);
     }
 //----------------------------------------------------------------------------------------------------------------------
+// тут будет локальный стейт с тайтлом + сюда нужно будет закинуть функцию колбек
+// которая внутри вызывает addMessage и после очищает инпут
+    let [title, setTitle] = useState('');
 
-    let [title,setTitle] = useState('');
-
-    const callBackButtonHandler= () => {
+    const callBackHandler = () => {
         addMessage(title)
         setTitle('')
     }
+
 //----------------------------------------------------------------------------------------------------------------------
     return (
         <div className="App">
@@ -98,10 +100,10 @@ function App() {
             {/*        })}*/}
             {/*    </div>*/}
             {/*</div>*/}
-
-            <div>
+            <>
+                <h1>Microtasks Input & button</h1>
+                <ButtonInput name={'ADD'} callBack={callBackHandler}/>
                 <Input setTitle={setTitle} title={title}/>
-                <ButtonInput name={'ADD'} callBack={callBackButtonHandler}/>
                 <div>
                     {message.map((m, index) => {
                         return (
@@ -109,7 +111,7 @@ function App() {
                         )
                     })}
                 </div>
-            </div>
+            </>
         </div>
     );
 }
