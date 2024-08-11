@@ -34,6 +34,7 @@ const Foo3 = () => {
     console.log('Im stupid button')
 }
 
+type FilterType = 'All' | 'RUBLES' | 'Dollars'
 
 function App() {
 //     state for universal button----------------------------------------------------------------------------------------
@@ -69,6 +70,35 @@ function App() {
         addMessage(title)
         setTitle('')
     }
+
+//----------------------------------------------------------------------------------------------------------------------
+//     about method filter
+
+    const [money, setMoney] = useState([
+        {banknots: 'Dollars', value: 100, number: ' a1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' z1234567890'},
+        {banknots: 'RUBLES', value: 100, number: ' w1234567890'},
+        {banknots: 'Dollars', value: 100, number: ' e1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' c1234567890'},
+        {banknots: 'RUBLES', value: 100, number: ' r1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' x1234567890'},
+        {banknots: 'RUBLES', value: 50, number: ' v1234567890'},
+    ])
+
+    let currentMoney = money
+    const [filter, setFilter] = useState<FilterType>('All');
+
+    if (filter === 'Dollars') {
+        currentMoney = money.filter(m => m.banknots === 'Dollars')
+    }
+    if (filter === 'RUBLES') {
+        currentMoney = money.filter(m => m.banknots === 'RUBLES')
+    }
+
+    const onClickHandler = (nameButton: FilterType) => {
+        setFilter(nameButton);
+    }
+
 
 //----------------------------------------------------------------------------------------------------------------------
     return (
@@ -110,6 +140,31 @@ function App() {
                             <div key={index}>{m.message}</div>
                         )
                     })}
+                </div>
+            </>
+
+            <>
+                <h1> Filtered Money </h1>
+                <div>
+                    <ul>
+                        {currentMoney.map((m, index) => {
+                            return (
+                                <ul>
+                                    <li key={index}>
+                                        <span>{m.value}</span>
+                                        <span>{m.banknots}</span>
+                                        <span>{m.number}</span>
+                                    </li>
+                                </ul>
+                            )
+                        })}
+                    </ul>
+                    <div style={{marginLeft: '40px'}}>
+                        <button onClick={() => onClickHandler('All')}>all</button>
+                        <button onClick={() => onClickHandler('RUBLES')}>rubles</button>
+                        <button onClick={() => onClickHandler('Dollars')}>dollar</button>
+                    </div>
+
                 </div>
             </>
         </div>
