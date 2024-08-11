@@ -34,7 +34,8 @@ const Foo3 = () => {
     console.log('Im stupid button')
 }
 
-type FilterType = 'All' | 'RUBLES' | 'Dollars'
+type FilterType = 'All' | 'RUBLS' | 'Dollars'
+
 
 function App() {
 //     state for universal button----------------------------------------------------------------------------------------
@@ -72,33 +73,41 @@ function App() {
     }
 
 //----------------------------------------------------------------------------------------------------------------------
-//     about method filter
+//    method filter
+    // отмапить массив с money
+    // создать 3 кнопки и к каждой создать функцию с помощью которой будем переключать значение
+    // создать рандомную переменную и ей присвоить значение money(создали копию тем самым)
+    //  создать локальный стейт с фильтром денег + протипизировать его
+    // создать условие если доллары - то показывай доллары и тд
+    // создать функцию которая при клике будет сетать значение в зависимости от выбранного фильтра
+    // в эту функцию пробросить значения которые в типизации
 
     const [money, setMoney] = useState([
         {banknots: 'Dollars', value: 100, number: ' a1234567890'},
         {banknots: 'Dollars', value: 50, number: ' z1234567890'},
-        {banknots: 'RUBLES', value: 100, number: ' w1234567890'},
+        {banknots: 'RUBLS', value: 100, number: ' w1234567890'},
         {banknots: 'Dollars', value: 100, number: ' e1234567890'},
         {banknots: 'Dollars', value: 50, number: ' c1234567890'},
-        {banknots: 'RUBLES', value: 100, number: ' r1234567890'},
+        {banknots: 'RUBLS', value: 100, number: ' r1234567890'},
         {banknots: 'Dollars', value: 50, number: ' x1234567890'},
-        {banknots: 'RUBLES', value: 50, number: ' v1234567890'},
+        {banknots: 'RUBLS', value: 50, number: ' v1234567890'},
     ])
 
-    let currentMoney = money
-    const [filter, setFilter] = useState<FilterType>('All');
+    let currentMoney = money;
 
-    if (filter === 'Dollars') {
-        currentMoney = money.filter(m => m.banknots === 'Dollars')
-    }
-    if (filter === 'RUBLES') {
-        currentMoney = money.filter(m => m.banknots === 'RUBLES')
+    const [filter , setFilter] = useState<FilterType>('All')
+
+    if(filter === 'Dollars'){
+        currentMoney = money.filter( filteredMoney => filteredMoney.banknots === 'Dollars')
     }
 
-    const onClickHandler = (nameButton: FilterType) => {
-        setFilter(nameButton);
+    if(filter === 'RUBLS'){
+        currentMoney = money.filter( filteredMoney => filteredMoney.banknots === 'RUBLS')
     }
 
+    const onClickHandler = (filter:FilterType) => {
+        setFilter(filter)
+    }
 
 //----------------------------------------------------------------------------------------------------------------------
     return (
@@ -144,25 +153,23 @@ function App() {
             </>
 
             <>
-                <h1> Filtered Money </h1>
+                <h1>Filtered Money</h1>
                 <div>
                     <ul>
                         {currentMoney.map((m, index) => {
                             return (
-                                <ul>
-                                    <li key={index}>
-                                        <span>{m.value}</span>
-                                        <span>{m.banknots}</span>
-                                        <span>{m.number}</span>
-                                    </li>
-                                </ul>
+                                <li key={index}>
+                                    <span> {m.value} </span>
+                                    <span> {m.banknots} </span>
+                                    <span> {m.number} </span>
+                                </li>
                             )
                         })}
                     </ul>
-                    <div style={{marginLeft: '40px'}}>
-                        <button onClick={() => onClickHandler('All')}>all</button>
-                        <button onClick={() => onClickHandler('RUBLES')}>rubles</button>
-                        <button onClick={() => onClickHandler('Dollars')}>dollar</button>
+                    <div style={{display: 'flex', gap: '30px', padding: '30px'}}>
+                        <button onClick={() => onClickHandler('All')} >All</button>
+                        <button onClick={() => onClickHandler('RUBLS')} >rubles</button>
+                        <button onClick={() => onClickHandler('Dollars')} >dollars</button>
                     </div>
 
                 </div>
